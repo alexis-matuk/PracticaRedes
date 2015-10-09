@@ -1,0 +1,103 @@
+
+Current configuration : 1223 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R2
+!
+!
+!
+enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO1941/K9 sn FTX1524IHQT
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+ --More-- 
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0/0, changed state to up
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 172.31.24.254 255.255.255.0
+ duplex auto
+ speed auto
+ ipv6 address FE80::2 link-local
+ ipv6 address 2001:DB8:C001:3::1/64
+!
+interface GigabitEthernet0/1
+ ip address 172.31.25.254 255.255.255.0
+ duplex auto
+ speed auto
+ ipv6 address FE80::2 link-local
+ ipv6 address 2001:DB8:C001:4::1/64
+!
+interface Serial0/0/0
+ ip address 209.165.200.226 255.255.255.252
+ ipv6 address FE80::2 link-local
+ ipv6 address 2001:DB8:C001:ACE::2/64
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 Serial0/0/0 
+!
+ip flow-export version 9
+!
+ipv6 route ::/0 Serial0/0/0
+!
+!
+banner motd ^CUnauthorized Access Prohibited!^^C
+!
+!
+!
+!
+line con 0
+ password cisco
+ login
+!
+line aux 0
+!
+line vty 0 4
+ password cisco
+ login
+!
+!
+!
+end
